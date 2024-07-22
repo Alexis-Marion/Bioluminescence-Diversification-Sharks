@@ -1,0 +1,55 @@
+
+                     PyRate - v3.1.3 - 20230825
+
+              Bayesian estimation of origination,
+               extinction and preservation rates
+                  from fossil occurrence data
+
+                     pyrate.help@gmail.com
+
+    
+
+Module FastPyRateC was loaded.
+
+ Occ_sp_Squali_PyRate ['../Data/Occ_sp_Squali_PyRate.py'] 
+
+
+The analysis includes 99 species (0 were excluded)
+[5.33, 2.58] 128.672494 0.0
+Using Gamma priors on the birth-death rates (G_l[1.1,1.1], G_m[1.1,1.1]).
+
+Using 47 species for model testing
+HPP* max likelihood: -768.42 q rate: [0.668]
+TPP* max likelihood: -767.14 q rates: [ 0.659  0.635 15.201]
+NHPP* max likelihood: -771.48 q rate: [0.39] 
+
+models: ['HPP' 'NHPP' 'TPP']
+AICc scores: [1538.934 1545.051 1540.842]
+
+    --------------------------------------
+    Best model: HPP
+    
+    dAIC - NHPP: 6.116 
+    dAIC - TPP: 1.907 ***
+    
+    *** indicates significance at P < 0.01
+    *   indicates significance at P < 0.05
+    --------------------------------------
+    
+
+Testing the significance of each shift in the TPP model...
+    
+Full TPP model
+Lik: -767.1417274741011 AICs: 1540.841594483086
+Q times: [5.33 2.58 0.  ] 
+Rates: [ 0.659  0.635 15.201]
+
+Removing 5.33
+Lik: -767.1446802181521 AICs: 1538.5620877090314
+Q times: [2.58 0.  ] 
+Rates: [ 0.652 15.198]
+
+Removing 2.58
+Lik: -768.3254669921533 AICs: 1540.923661257034
+Q times: [5.33 0.  ] 
+Rates: [0.655 0.804]
