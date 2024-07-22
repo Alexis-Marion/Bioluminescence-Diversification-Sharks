@@ -6,7 +6,7 @@
 
 for file in $1/*mcmc.log
 	do
-	python3.8 ../PyRate/PyRate.py -plotQ ${file} -qShift $4 -b $2
+	python3.8 ../../PyRate/PyRate.py -plotQ ${file} -qShift $4 -b $2
 	done
 mkdir -p $3
 mv $1/*_Qrates* $3
