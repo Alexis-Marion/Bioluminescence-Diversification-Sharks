@@ -45,7 +45,7 @@ states_traits<-states[!states$Species %in% setdiff(states$Species, phy$tip.label
 categorical_trait<-states_traits[,as.numeric(args[2])]
 names(categorical_trait)<-states_traits$Species
 
-continuous_trait<-log(states_traits[,6])
+continuous_trait<-log(states_traits$Body.size)
 names(continuous_trait)<-states_traits$Species
 
 dtf<-as.data.frame(cbind(categorical_trait,continuous_trait))
@@ -54,9 +54,9 @@ dtf$continuous_trait<-as.numeric(dtf$continuous_trait)
 
 dat<-cbind(rownames(dtf),dtf)
 
-BM1 <- OUwie(phy, dat, model="BM1", algorithm = 'invert', simmap.tree = FALSE)
-OU1 <- OUwie(phy, dat, model="OU1", algorithm = 'invert', simmap.tree = FALSE)
-OUM <- OUwie(phy, dat, model="OUM", algorithm = 'invert', simmap.tree = FALSE)
+BM1 <- OUwie(phy, dat, model = "BM1", algorithm = 'invert', simmap.tree = FALSE)
+OU1 <- OUwie(phy, dat, model = "OU1", algorithm = 'invert', simmap.tree = FALSE)
+OUM <- OUwie(phy, dat, model = "OUM", algorithm = 'invert', simmap.tree = FALSE)
 
 np<-c(BM1$param.count, OU1$param.count, OUM$param.count)
 lnLik<-c(BM1$loglik, OU1$loglik, OUM$loglik)

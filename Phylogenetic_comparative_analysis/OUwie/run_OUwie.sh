@@ -1,9 +1,9 @@
-# This script runs multiple corHMM analyses
+# This script runs multiple OUwie analyses
 # Two scripts are used here, one for the consensus tree (OUwie_consensus.r) and another one for the posterior tree distribution (OUwie_replicated.r)
-# The first argument is the path to the corHMM anaylis used for mapping the trait on the phylogeny
+# The first argument is the path to the corHMM analysis used for mapping the trait on the phylogeny
 # The second argument is the trait examined (7 for bioluminescence; 9 for habitat)
-# The third argument is the path to 
-# The last argument is the prefix for the output directory/file
+# The third argument is the path to either the output AICc table (consensus) or to output directory (replicated)
+# The last argument is the prefix for the output for the betst-fit model (consensus)
 
 # Consensus tree
 

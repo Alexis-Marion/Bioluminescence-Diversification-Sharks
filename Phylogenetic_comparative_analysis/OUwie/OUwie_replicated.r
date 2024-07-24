@@ -11,7 +11,6 @@ df<-read.csv("../../raw_data/Trait_data_Squaliformes_Fossil.tsv", sep="\t") # om
 
 fossil_list<-c("Protosqualus_albertsi", "Protosqualus_sigei", "Squalus_minor", "Protocentrophorus_balticus", "Squaliodalatias_savoiei", "Eodalatias_crenulatus", "Isistius_trituratus", "Cretascymnus_adonis", "Trigonognathus_virginiae", "Proetmopterus_hemmooriensis", "Eoetmopterus_supracretaceus", "Cretascymnus_westfalicus")
 
-
 for (i in 1:100){
     
     data_corHMM<-paste(args[1], "tab_replicate_", i, ".rds", sep ="")
@@ -50,7 +49,7 @@ states_traits<-states[!states$Species %in% setdiff(states$Species, phy$tip.label
 categorical_trait<-states_traits[,as.numeric(args[2])]
 names(categorical_trait)<-states_traits$Species
 
-continuous_trait<-log(states_traits[,6])
+continuous_trait<-log(states_traits$Body.size)
 names(continuous_trait)<-states_traits$Species
 
 dtf<-as.data.frame(cbind(categorical_trait,continuous_trait))
@@ -61,9 +60,17 @@ dtf$continuous_trait<-as.numeric(dtf$continuous_trait)
 
 dat<-cbind(rownames(dtf),dtf)
 
-BM1 <- OUwie(phy, dat, model="BM1", algorithm = 'invert', simmap.tree = FALSE)
-OU1 <- OUwie(phy, dat, model="OU1", algorithm = 'invert', simmap.tree = FALSE)
-OUM <- OUwie(phy, dat, model="OUM", algorithm = 'invert', simmap.tree = FALSE)
+### Brownian motion
+    
+BM1 <- OUwie(phy, dat, model = "BM1", algorithm = 'invert', simmap.tree = FALSE)
+
+### Ornstein-Uhlenbeck one optimum
+    
+OU1 <- OUwie(phy, dat, model = "OU1", algorithm = 'invert', simmap.tree = FALSE)
+
+### Ornstein-Uhlenbeck multiple optima
+    
+OUM <- OUwie(phy, dat, model = "OUM", algorithm = 'invert', simmap.tree = FALSE)
 
 ### Get AICc metrics
 
