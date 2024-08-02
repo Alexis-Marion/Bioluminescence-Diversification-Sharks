@@ -13,9 +13,12 @@
   - [2.1 Selecting PyRate model](#21-Selecting-PyRate-model)
 	- [2.2 Extracting time for speciation and extinction](#22-Extracting-time-for-speciation-and-extinction)
 	- [2.3 Estimating lineage through time per habitat](#23-Estimating-lineage-through-time-per-habitat)
-  - [2.4 Estimating tempo of origination](#24-Estimating-tempo-of-origination)
+  	- [2.4 Estimating tempo of origination](#24-Estimating-tempo-of-origination)
 	- [2.5 Grafting fossils](#25-Grafting-fossils)
-- [3 Phylogenetic comparative analyses](#3-Phylogenetic-comparative--analyses)
+- [3 Phylogenetic comparative analyses](#3-Phylogenetic-comparative-analyses)
+	- [3.1 Analyses of discrete trait evolution with corHMM](#31-Analyses-of-discrete-trait-evoplution-with-corHMM)
+ 	- [3.2 Analyses of continuous trait evolution with OUwie and phylogenetic ANOVA](#32-Analyses-of-continuous-trait-evolution-with-OUwie-and-phylogenetic-ANOVA)
+  	- [3.3 Joint estimation of discrete and continuous trait evolution with hOUwie](#32-Joint-estimation-of-discrete-and-continuous-trait-evolution-with-hOUwie)
 - [Reference](#Reference)
 
 <p align="justify"> This repository's purpose is to give a means of replicability to the article "Sequential trait evolution did not drive deep-time diversification in sharks" but can be generalized to other similar data. All of the presented scripts are written in R language (R Core Team, 2022). Each script is available as both an annotated notebook (.ipynb) or a raw .r file (unannotated).
