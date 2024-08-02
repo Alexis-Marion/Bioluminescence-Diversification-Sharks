@@ -4,12 +4,12 @@
 
 - [Summary](#Summary)
 - [Overview](#Overview)
-- [1 Bayesian analyses of the fossil record with PyRate](#1-Bayesian-analyses-of-the-fossi-record-with-PyRate)
+- [1 Bayesian estimation of deep-time diversfiication with PyRate](#1-Bayesian-estimation-of-deep-time-diversification-with-PyRate)
 	- [1.1 Preservation model](#11-Preservation-model)
 	- [1.2 Running PyRate](#12-Running-Pyrate)
 	- [1.3 Assess convergence](#13-Assess-convergence)
   - [1.4 Plotting PyRate results](#14-Plotting-PyRate-results)
-- [2 Analyses-of-the-fossil-record](#2-Analyses-of-the-fossil-record)
+- [2 Analyses of the fossil record](#2-Analyses-of-the-fossil-record)
   - [2.1 Selecting PyRate model](#21-Selecting-PyRate-model)
 	- [2.2 Extracting time for speciation and extinction](#22-Extracting-time-for-speciation-and-extinction)
 	- [2.3 Estimating lineage through time per habitat](#23-Estimating-lineage-through-time-per-habitat)
@@ -21,36 +21,32 @@
   	- [3.3 Joint estimation of discrete and continuous trait evolution with hOUwie](#32-Joint-estimation-of-discrete-and-continuous-trait-evolution-with-hOUwie)
 - [Reference](#Reference)
 
-<p align="justify"> This repository's purpose is to give a means of replicability to the article "Sequential trait evolution did not drive deep-time diversification in sharks" but can be generalized to other similar data. All of the presented scripts are written in R language (R Core Team, 2022). Each script is available as both an annotated notebook (.ipynb) or a raw .r file (unannotated).
-	If you plan to use any of these scripts, please cite "Marion et al., 2024". </p>
+<p align="justify"> This repository's purpose is to give a means of replicability to the article "Ecological opportunity fostered deep-sea  diversification of squaliform sharks" but can be generalized to other similar data. All of the presented scripts are written in R language (R Core Team, 2022). Each script is available as both an annotated notebook (.ipynb) or a raw .r file (unannotated).
+	If you plan to use any of these scripts, please cite "XXX". </p>
 
 ## Overview
 
-<p align="justify"> This repository contains scripts and html files for performing the following comparative analyses:
+<p align="justify"> This repository contains scripts and html files for performing the following analyses:
 
-**1**: Modeling trait evolution
+**1**: Bayesian estimation of deep-time diversification with PyRate
 
-**2**: Analyses of diversification
+**2**: Analyses of the fossil record
 
-**3**: Sensitivity analyses
+**3**: Phylogenetic comparative analyses
 
-<p align="justify"> Data from Marion et al., (2024) are available here "10.6084/m9.figshare.24581718".</p>
+<p align="justify"> All data used to perform each analyses are deposited on this repository </p>
 
-## 1 Modeling trait evolution
+## 1 Bayesian estimation of deep-time diversification with PyRate
 
 `package requirement (corHMM, mclust, string, phytools, qpcR, ggtree, secsse, ggtree, phytools, treedataverse, RColorBrewer, ggplot2, ggpmisc, optional(stringr))`
 
 `used script (corHMM.r; corHMM_Diet.r; Plot_ASE.r)`
 
-<p align="justify">  The purpose of this analysis is twofold. First, we want to test how traits evolved and what evolutionary scenario they followed. Second, we performed ancestral state estimation which can be later compared with the ancestral state estimation from SecSSE. In this section, we will be using the corHMM package (Boyko & Beaulieu, 2021).</p>
+<p align="justify">  In this first session, we will be using PyRate (Silvestro et al, 2014). PyRate is a programm implemented in Python whose aiml is to jointly estimate the preservation process, the tempo of origination and extinction of lineages based on their occurences in the fossil record. Here, we will assume that the PyRate repository with its functions is at the root of the current working directory.</p>
 
-### 1.1 Data cleaning and model construction
+### 1.1 Preservation model
 
-<p align="justify"> The first step in any comparative analysis is to clean and prepare the trait data. To do so, we must extract and isolate these values in a vector. As maximum body-size is a continuous character, we may want to discretize it. In this script, we use a Gaussian mixture model with the mclust function of the mclust (Fraley et al., 2012) package to cluster continuous data. This package automatically selects the most likely or a user-specified  number of groups. Then, we name each trait value according to its species name.
-
-The second step is to build the actual evolutionary model we want to test. Usually, three models are tested when performing trait evolution analyses: an equal rate, a symmetric rate (transition from A to B is the same that B to A), and all rates differ, which is self-explanatory. 
-
-However, these models may not be adequate when testing specific evolutionary scenarios. For example, we may want to test whether the direct transition from small size to large size is impossible. To do so, we create a custom transition matrix by indicating that direct transitions between opposed states are impossible. In our case of Shark evolution, all these models will be referred to from now on as "sequential models", namely if one wants to go from A to C, there are two transitions, A to B, and B to C. Each model parameter specification was then entered in a standardised corHMM fashion. To properly model trait evolution, one should always keep in mind that evolutionary rates may vary across the phylogeny, thus it is best practice to introduce another parameter, the "rate" (herein referred to as rate-class) parameter. This parameter allows for transition rate  heterogeneity across the phylogeny, that is if one part of the phylogeny has short branching patterns as opposed to the rest of the tree, corHMM will take into account such heterogeneity, regardless of the trait state. Introducing these parameters is a great way to avoid false positives but is also very resource-consuming as these models are parameters rich (often more than twice the number of parameters for a one-rate model). To keep the likelihood space to allow and avoid over-parametrization, we did not go as far as 3-rate classes.
+<p align="justify"> Thus, choosing the best-fit preservation model
 
 </p> 
 
