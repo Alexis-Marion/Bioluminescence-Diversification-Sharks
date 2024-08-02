@@ -8,7 +8,7 @@
 	- [1.1 Preservation model](#11-Preservation-model)
 	- [1.2 Running PyRate](#12-Running-Pyrate)
 	- [1.3 Assess convergence](#13-Assess-convergence)
-  - [1.4 Plotting PyRate results](#14-Plotting-PyRate-results)
+  	- [1.4 Plotting PyRate results](#14-Plotting-PyRate-results)
 - [2 Analyses of the fossil record](#2-Analyses-of-the-fossil-record)
   - [2.1 Selecting PyRate model](#21-Selecting-PyRate-model)
 	- [2.2 Extracting time for speciation and extinction](#22-Extracting-time-for-speciation-and-extinction)
@@ -46,17 +46,21 @@
 
 ### 1.1 Preservation model
 
-<p align="justify"> Thus, choosing the best-fit preservation model
+<p align="justify"> One the main strength of PyRate is its ability to account for the biais of the fossil record, by estimating a preservation process correcting the estimated age derived from raw occurences data. Thus, choosing the best-fit preservation model for any PyRate analysis is critical. Fortunately, Silvestro et al. (2018) implemented a likelihood-based approach for preservation model selection.Yet, while this procedure is certainly useful, it is incomplete. Indeed the first implementation allowed for model selection across HPP, NHPP, TPP and alternative version of the TPP, with missing bins. Howver, bin removal occured only once, and were not recursive. Consequently, model selection is incomplete. Here, we corrected and enhanced this procedure, by performing model selection on all PyRate replicate (here 100). Furthermore, we allowed for recursivec bin removal, meaning that the best fit TPP model could be a two-bin model whereas the generating TPP model could be a five-bin model. Model selection is performed with pairwise comparaison of the AICc metrics across all replicates. </p>
 
 </p> 
 
-### 1.2 Selecting the likeliest model
+### 1.2 Running PyRate
 
-<p align="justify"> Then, we may perform each model and save relevant metrics for comparison. This script saves each model output into a data frame filled with the log-likelihood, the number of parameters, the AICc, the $\Delta$ AICc, and the $\omega$ AICc. We then automatically save the output from the best-fitting model for each trait.</p> 
+<p align="justify"> The script provided in this section is rather simple, and run a BDCS analyses on 20,000,000 generation on the genus dataset including singeltons, with diversification shifts every 5 Myrs and integrating preservation shifts from the 1.1 section. Here, to ber computaionally efecient, we choose to parallelise our run on 20 cpu.</p> 
 
-### 1.3 Ancestral state estimation
+### 1.3 Assess convergence
 
-Lastly, one may be interested in estimating the ancestral condition of his clade of interest. Fortunately, corHMM jointly estimates transition rates and ancestral states, thus it is pretty easy to extract these values and plot directly on the phylogeny. To do this, we must use *corHMM_ASE_script.r*. While it is pretty easy to estimate them, ancestral state estimations are and remain **estimations**, thus one should always interpret them with utmost care.
+PyRate is a bayesian programm, thus we will consider that a PyRate run is finished when it achieved convergence. A popular metric to evaluate convergence is the ESS (effective sample size), and it is generally considered that when its number is above 200, convergence is achevied. Thus, we assessed convergence on all run using the "" scripts. Furthermore, these scritps give additional usefull metrics on the run, such as the origination age, extinction age (if including solely extinct taxa),and the proportion of Ts and Te, with ESS above 200. We also provided a graphical output that can be executed using ....
+
+### 1.4 Plotting PyRate results
+
+In this last section, we provided plotting scripts to display graphically each PyRate output. These scripts will take as input the output direcotry of a regular (BDCS or RJMCMC) PyRate run, and will represent, the RTT (origination and extiction), the diversification RTT, the LTT and the QTT.
 
 ## 2 Diversification analyses
 
