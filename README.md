@@ -10,7 +10,7 @@
 	- [1.3 Assess convergence](#13-Assess-convergence)
   	- [1.4 Plotting PyRate results](#14-Plotting-PyRate-results)
 - [2 Analyses of the fossil record](#2-Analyses-of-the-fossil-record)
-        - [2.1 Selecting appropriate PyRate models](#21-Selecting-appropriate-PyRate-models)
+ 	- [2.1 Selecting appropriate PyRate models](#21-Selecting-appropriate-PyRate-models)
 	- [2.2 Extracting time for speciation and extinction](#22-Extracting-time-for-speciation-and-extinction)
 	- [2.3 Estimating lineage through time per habitat](#23-Estimating-lineage-through-time-per-habitat)
   	- [2.4 Estimating tempo of origination](#24-Estimating-tempo-of-origination)
