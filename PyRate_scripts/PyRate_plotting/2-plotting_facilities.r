@@ -25,7 +25,7 @@ correct_q<-function(q_df,ltt_df){
 
 
 ## Function for Rates Through Time (RTT) plots ---------------------------------
-rtt_plot <- function(data, #has to be formatted as the output of the `extract_rtt()` function from the `extract_param_from_PyRate_outputs.R` script
+rtt_plot <- function(data, #has to be formatted as the output of the `extract_rtt()` function from the `extract_param_from_PyRate_outputs.r` script
                      type = c("sp", "ex", "SpEx", "net"), #type of rates we want to represent ("SpEx" => combined speciation and extinction)
                      restrict_y = TRUE, restrict_thr = 1.4, #should we restrict y scale to a certain threshold?
                      x_breaks = get_age_bound(data)[[1]],
@@ -114,7 +114,7 @@ output<-list(deeptime::epochs[mn:mx,2],deeptime::epochs[mn:mx,])
 
 
 ## Function for Lineage Through Time (LTT) plot from individual replicates -----
-ltt_plot <- function(ltt_df, #has to be in the format returned by the `extract_ltt()` function from the `extract_param_from_PyRate_outputs.R` script
+ltt_plot <- function(ltt_df, #has to be in the format returned by the `extract_ltt()` function from the `extract_param_from_PyRate_outputs.r` script
                      x_breaks = get_age_bound2(ltt_df)[[1]],
                      y_breaks = seq(0,250,50),
                      y_labels = seq(0,250,50),
