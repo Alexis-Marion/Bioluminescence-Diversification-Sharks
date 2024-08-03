@@ -38,105 +38,126 @@
 
 ## 1 Bayesian estimation of deep-time diversification with PyRate
 
-`package requirement (corHMM, mclust, string, phytools, qpcR, ggtree, secsse, ggtree, phytools, treedataverse, RColorBrewer, ggplot2, ggpmisc, optional(stringr))`
-
-`used script (corHMM.r; corHMM_Diet.r; Plot_ASE.r)`
+`used directory (PyRate_scripts)`
 
 <p align="justify">  In this first session, we will be using PyRate (Silvestro et al, 2014). PyRate is a program implemented in Python whose aim is to jointly estimate the preservation process, the tempo of origination and extinction of lineages based on their occurrences in the fossil record. Here, we will assume that the PyRate repository with its functions is at the root of the current working directory.</p>
 
 ### 1.1 Preservation model
 
-<p align="justify"> One of the main strengths of PyRate is its ability to account for the bias of the fossil record, by estimating a preservation process and correcting the estimated age derived from raw occurrence data. Thus, choosing the best-fit preservation model for any PyRate analysis is critical. Fortunately, Silvestro et al. (2018) implemented a likelihood-based approach for preservation model selection. Yet, while this procedure is certainly useful, it is incomplete. Indeed the first implementation allowed for model selection across HPP, NHPP, TPP and alternative versions of the TPP, with missing bins. However, bin removal occurred only once, and was not recursive. Consequently, model selection is incomplete. Here, we corrected and enhanced this procedure, by performing model selection on all PyRate replicates (here 100). Furthermore, we allowed for recursive bin removal, meaning that the best fit TPP model could be a two-bin model whereas the generating TPP model could be a five-bin model. Model selection is performed with pairwise comparisons of the AICc metrics across all replicates. </p>
+`used directory (Preservation_Test)`
 
-</p> 
+`used script (model_preservation_test.sh, model_drafting.r; run_preservation.sh)`
+
+<p align="justify"> One of the main strengths of PyRate is its ability to account for the bias of the fossil record, by estimating a preservation process and correcting the estimated age derived from raw occurrence data. Thus, choosing the best-fit preservation model for any PyRate analysis is critical. Fortunately, Silvestro et al. (2019) implemented a likelihood-based approach for preservation model selection. Yet, while this procedure is certainly useful, it is incomplete. Indeed the first implementation allowed for model selection across HPP, NHPP, TPP and alternative versions of the TPP, with missing bins. However, bin removal occurred only once, and was not recursive. Consequently, model selection is incomplete. Here, we corrected and enhanced this procedure, by performing model selection on all PyRate replicates (here 100). Furthermore, we allowed for recursive bin removal, meaning that the best fit TPP model could be a two-bin model whereas the generating TPP model could be a five-bin model. Model selection is performed with pairwise comparisons of the AICc metrics across all replicates. </p>
 
 ### 1.2 Running PyRate
+
+`used directory (PyRate_runs)`
+
+`used script (PyRate_run.sh)`
 
 <p align="justify"> The script provided in this section is rather simple, and runs a BDCS (birth-death with constrained shifts) analysis on 20,000,000 generations on the genus dataset including singletons, with diversification shifts every 5 Myrs and integrating preservation shifts from the 1.1 section. Here, to be computationally efficient, we choose to parallelise our run on 20 CPU.</p> 
 
 ### 1.3 Assess convergence
 
-<p align="justify"> PyRate is a Bayesian program, thus we will consider that a PyRate run is finished when it achieves convergence. A popular metric to evaluate convergence is the ESS (effective sample size), and it is generally considered that when its number is above 200, convergence is achieved. Thus, we assessed convergence on all runs using the "" scripts. Furthermore, these scripts give additional useful metrics on the run, such as the origination age, extinction age (if including solely extinct taxa), and the proportion of Ts and Te, with ESS above 200. We also provided a graphical output that can be executed using ....
+`used directory (PyRate_convergence)`
+
+`used script (assess_run_convergence.py; plot_ess.r; run_convergence.sh)`
+
+<p align="justify"> PyRate is a Bayesian program, thus we will consider that a PyRate run is finished when it achieves convergence. A popular metric to evaluate convergence is the ESS (effective sample size), and it is generally considered that when its number is above 200, convergence is achieved. Thus, we assessed convergence on all runs using the "assess_run_convergence.py" script. Furthermore, this script gives additional useful metrics on the run, such as the origination age, extinction age (if including solely extinct taxa), and the proportion of Ts and Te, with ESS above 200. We also provided a graphical output that can be executed using "plot_ess.r". These two scripts can be run sequentially using the "run_convergence.sh" script.
 
 ### 1.4 Plotting PyRate results
 
-<p align="justify"> In this last section, we provided plotting scripts to display graphically each PyRate output. These scripts will take as input the output directory of a regular (BDCS or RJMCMC) PyRate run. They will represent, the RTT (origination and extinction), the diversification RTT, the LTT and the QTT.
+`used directory (PyRate_plotting)`
+
+`used script (1-extract_param_from_PyRate_outputs.r; 2-plotting_facilities.r; Plot_rates.r; Q_rate.sh; ltt_creator.sh; master_script_plotting.sh; parse_Q_rates.py; run_plotting.sh)`
+
+<p align="justify"> In this last section, we provided plotting scripts to display graphically each PyRate output. These scripts will take as input the output directory of a regular (BDCS or RJMCMC) PyRate run. They will represent, the RTT (origination and extinction), the diversification RTT, the LTT and the QTT. All the aforementioned scripts are managed using the "master_script_plotting.sh" script, which is the only one that is meant to be run by the user. </p>
 
 ## 2 Analyses of the fossil record
+
+`used directory (Analyses_of_the_fossil_record)`
 
 <p align="justify">  In this section session, we will be using the output from PyRate and molecular phylogenies to estimate the tempo of origination of several clades, ecologies and traits.</p>
 
 ### 2.1 Selecting appropriate PyRate models
 
-<p align="justify"> In this section, we propose a quantitative comparison between each PyRate model couple (e.g. a model with full preservation time bins, and another with less preservation shift frame). Specifically, since some alternative models do not possess the same structure, statistical comparison between each model could be inappropriate. Instead, we could still compare the estimated values (in our case Ts, Te, origination and extinction rate) and evaluate whether they significantly differ when comparing two alternative models. Here we choose to compare each PyRate replicate separately (thus each comparison is performed 20 times), and consider performing pairwise comparisons of Ts, Te, origination and extinction rate values between each two alternative models.
+`used directory (Model_selection)`
 
+`used script (Model_selection.r; run_Model_selection.sh)`
+
+<p align="justify"> In this section, we propose a quantitative comparison between each PyRate model couple (e.g. a model with full preservation time bins, and another with less preservation shift frame). Specifically, since some alternative models do not possess the same structure, statistical comparison between each model could be inappropriate. Instead, we could still compare the estimated values (in our case Ts, Te, origination and extinction rate) and evaluate whether they significantly differ when comparing two alternative models. Here we choose to compare each PyRate replicate separately (thus each comparison is performed 20 times), and consider performing pairwise comparisons of Ts, Te, origination and extinction rate values between each two alternative models. </p>
 
 ### 2.2 Extracting time for speciation and extinction
 
-<p align="justify"> These scripts are relatively straightforward and directly extract the Ts Te value for each replicate from a designated PyRate output directory, and merge them into a single file.
+`used directory (Ts_Te_maker)`
 
-Estimating lineage through time per habitat
+`used script (Ts_Te_maker.r)`
 
-<p align="justify"> Using the Ts/Te output from section 2.2 and by using palaeoenvironmental data, we estimated the lineage through time for each habitat.
+<p align="justify"> The first useful script in this section is "the random_sampler.r" script, which randomly samples 100 from a given distribution of tree. The last script "run_Model_selection.sh" is relatively straightforward and directly extract the Ts Te value for each replicate from a designated PyRate output directory, and merge them into a single file. </p>
 
-Estimating tempo of origination
+### 2.3 Estimating lineage through time per habitat
 
-<p align="justify"> Using the Ts/Te output from section 2.2 and the posterior tree distribution, this script estimates the tempo of origination for each major squaliform clade, using both palaeontological and neontological evidence. Likewise, this script also estimates the tempo of origination of each habitat preference across all Squaliformes families, using the Ts/Te values as input. Lastly, by combining palaeontological and neontological evidence we estimated the tempo of origination of each putative bioluminescent clade.
+`used directory (Lineage_through_time)`
 
-Grafting phylogenies
+`used script (Lineage through time by habitat (Squaliformes).r; Lineage through time by habitat (Squaliformes)-Randomised.r; utility_function_ltt_plot.r)`
 
-<p align="justify"> In this last section, we provide tools to graft fossil taxa on extant phylogenies.
-Placing a fossil into an already resolved extant time-calibrated tree represents a major challenge. To account for the potential bias possibly affecting the placement fossil, we relied on previously published phylogenetic hypotheses. Furthermore, to account for temporal uncertainty, we randomly sampled the orignation age for each extinct lineages from a uniform distrbution bounded with the estimated PyRate origination age as the upper limit, and the stem age of the sister clade of the fossil as the lower limit (i.e. the node preceding the aformentioned sister-clade). These scripts allow to perform this procedure on the consensus and posterior distribution, grafting up to twelve fossils.
+<p align="justify"> Using the Ts/Te output from section 2.2 and by using palaeoenvironmental data, we estimated the lineage through time for each habitat. The first script "Lineage through time by habitat (Squaliformes).r" plot the lineage through time per habitat for each dataset, whereas the second script "(Lineage through time by habitat (Squaliformes)-Randomised.r" randomly shuffle the habitat identity of each lineage while keeping the lineage through time pattern unaltered. Both these scripts use the "utility_function_ltt_plot.r" script.  </p>
 
-## 2 Diversification analyses
+### 2.4 Estimating tempo of origination
 
-`package requirement (ape, mclust, secsse, DDD, tidyverse, qgraph, ggtree, phytools, treedataverse, RColorBrewer, ggplot2, ggpmisc, optional(stringr))`
+`used directory (Origination_tempo)`
 
-`used script (SecSSE_Size.r; SecSSE_Reproduction.r; SecSSE_Habitat.r; SecSSE_Diet.r; SecSSE_ASE.r; Plot_ASE.r)`
+`used script (Plot_estimated_ages.r)`
 
-<p align="justify"> Now that we pictured trait evolution dynamics, we may want to assess whether our examined traits are responsible for extant diversity patterns. To do so we rely on SSE models (State-dependent speciation and extinction models), which are well-known for accounting for the impact that trait evolution has on patterns of lineage diversification. However, accounting for trait-dependent diversification is subject to numerous methodological biases (Beaulieu and Donoghue, 2013). Indeed, SSE models can falsely indicate an effect of the focal trait on diversification. Models with hidden traits (aka concealed traits), such as SeCSSE (Herrera-Alsina et al., 2019) or HiSSE (Beaulieu and O'Meara, 2016) can account for hidden variables in trait-dependant diversification. Thus, we will be using SecSSE, an SSE implementation for detecting trait-dependent diversification using phylogenies on multi-state characters, while being robust to false-postive. </p>
+<p align="justify"> Using the Ts/Te output from section 2.2 and the posterior tree distribution, this script estimates the tempo of origination for each major squaliform clade, using both palaeontological and neontological evidence. Likewise, this script also estimates the tempo of origination of each habitat preference across all Squaliformes families, using the Ts/Te values as input. Lastly, by combining palaeontological and neontological evidence we estimated the tempo of origination of each putative bioluminescent clade. </p>
 
-### 2.1 Data cleaning and model construction
+### 2.5 Grafting phylogenies
 
-<p align="justify"> Highly similar to corHMM, we will first need to discretise our continuous traits and clean our data. However, unlike corHMM, SecSSE estimates jointly transition rates and diversification rates (speciation and extinction). This is both a good thing, as it has been shown that accounting for diversification allows for better estimation of trait evolution (Maddison, 2006), and a bad thing as it dramatically increases the number of parameters in our analyses. Over-parametrization is a common issue in statistics, but it has not often been addressed in macroevolution studies. Here, we want to avoid this as much as possible by limiting the upper number of estimated parameters. To do so, we kept the structure of the best-fitting corHMM model for each trait, while still estimating its transition rates. Namely, if the best-fitting model for reproduction is a two-rate sequential symmetrical model, we will forbid direct transition from A to C, while constraining transitions from A to B to be equal to B to A. To minimize the effect of structuration on the output of the model, we kept the same structure of the transition matrix across all variants for each trait.
+`used directory (Grafting_Trees)`
 
-For each trait, we constructed seven models, one for constant rates (CR), three for examined-trait diversification (ETD) and three for concealed-trait diversification (CTD). The three variants for CTD and ETD models include a pure speciation model (different speciation for each state, one shared extinction), a pure extinction model (different extinction for each state, one shared speciation) and a net diversification model (different speciation and extinction for each state). For each of the seven models to avoid finding a local optimum, following Herrera-Alsina et al. (2019), we used three sets of initial parameters. One set was estimated using the standard birth-death model (bd_ML function in the R package “DDD” 5.2.2; Etienne et al., 2012), one was halved, and the other was doubled.
-</p>
+`used script (Grafting_trees.r; function_grafting.r)`
 
-### 2.2 Running and selecting the likeliest model
+<p align="justify"> In this last section, we provide tools to graft fossil taxa on extant phylogenies. Placing a fossil into an already resolved extant time-calibrated tree represents a major challenge. To account for the potential bias possibly affecting the placement fossil, we relied on previously published phylogenetic hypotheses. Furthermore, to account for temporal uncertainty, we randomly sampled the origination age for each extinct lineage from a uniform distribution bounded with the estimated PyRate origination age as the upper limit, and the stem age of the sister clade of the fossil as the lower limit (i.e. the node preceding the aforementioned sister-clade). These scripts allow us to perform this procedure on the consensus and posterior distribution, grafting up to twelve fossils. </p>
 
-<p align="justify"> Then, we may perform each model and save relevant metrics for comparison. Here, we save the output of each of the 21 models for each trait in a separate directory. SecSSE does not compute the AICc directly, thus we used the following formula to estimate the AICc "2*(-(ll)+2*k+(2*k*(k+1))/(n-k-1))" where ll is the log-likelihood of the model, k its number of parameters and n the number of taxa included in the analysis. Then directly in the script, we construct a data frame filled with the log-likelihood, the number of parameters, the AICc, the $\Delta$ AICc, the $\omega$ AICc and the estimated rates. </p>
+## 3 Phylogenetic comparative analyses
+
+`used directory (Phylogenetic_comparative_analysis)`
+
+<p align="justify"> In this section, we will perform several phylogenetic comparative analyses. </p>
+
+### 3.1 Analyses of discrete trait evolution with corHMM
+
+`used directory (corHMM)`
+
+`used script (corHMM_ASE_consensus.r; corHMM_ASE_replicated.r; run_corHMM.sh)`
+
+<p align="justify"> The first step in this section is to perform analyses of discrete trait evolution using corHMM. Both version of this script (consensus vs replicated) designate the consensus tree and the posterior distrubtion respectively. Both of these script are manage by the "run_corHMM.sh" which essentially run all these analyses on all trees (extant and fossil+extant) and traits (bioluminescence and habitat).  </p>
+
+### 3.2 Analyses of continuous trait evolution with OUwie and phylogenetic ANOVA
+
+`used directories (Panova, OUwie)`
+
+`used script (Phylogenetic_analysis_of_variance_(PANOVA).r; Phylogenetic_analysis_of_variance_(PANOVA-Replicated).r; PANOVA.sh; OUwie_consensus.r; OUwie_replicated.r; run_OUwie.sh)`
+
+<p align="justify"> The second step in this section is to perform analyses of continuous trait evolution using both PANOVA and OUwie. The first step consist on running a Phylogenetic analayses of variance, to compare wether the mean difference betwen any number of group significantly differ, even when considering phylogenetic relatedness. Both version of these scripts are managed by the script "PANOVA.sh" which will perform PANOVA on all dataset and on all trees (extant and fossil+extant). For OUwie, similarly to corHMM, both version of this script (consensus vs replicated) designate the consensus tree and the posterior distrubtion respectively. Both of these script are manage by the "run_OUwie.sh" which essentially run all these analyses on all trees (extant and fossil+extant) and traits (bioluminescence and habitat).  </p>
 
 
-### 2.3 Ancestral state estimation
+### 3.3 Joint estimation of discrete and continuous trait evolution with hOUwie
 
-<p align="justify"> After the selection of the best-fitting model, one may want to estimate ancestral states across the phylogeny. However, unlike corHMM, SecSSE does not directly infer ancestral state, rather we may require another procedure to properly estimate ancestral state. This procedure is highlighted in the script "SecSSE_ASE.r", where there is the code for filling proper parameters. This procedure is a bit tricky, but you will find in the code that everything is annotated. Finally, after running our model (which is quite fast), we may plot our ancestral state directly on the phylogeny, similarly to what was done with corHMM  </p>
+`used directory (hOUwie)`
 
-## 3 Sensitivity analyses 
+`used script (hOUwie_consensus.r; hOUwie_consensus_bioluminescence_Replicated.r; run_hOUwie.sh)`
 
-`package requirement (ape, mclust, secsse, DDD, tidyverse, qgraph, tidyverse, ggpubr, rstatix, optional(string))`
-
-`used script (corHMM.r; corHMM_Diet.r; SecSSE_Size.r; SecSSE_Reproduction.r; SecSSE_Habitat.r; SecSSE_Diet.r; Posterior_test_comparative_analysis.r)`
-
-<p align="justify"> Both trait-dependent evolution and diversification model require phylogeny. However, phylogenetic trees are hypotheses. Consequently, a phylogeny may not accurately reflect, which may affect downstream analyses. Worse, when a calibrated phylogeny is employed the uncertainty is twofold: as both dating and phylogenetic estimation are affected. We accounted for both phylogenetic and dating uncertainty by performing sensitivity analyses on 100 trees extracted from the posterior distribution of the BEAST analysis. To perform these analyses, the user just has to replace the input tree and the data frame output manually in each script (for an example of how to do it, see the following scripts "corHMM_replicated.r", "SecSSE_Size_replicated.r", and "multiRun_script.sh"). We analyzed whether we could reliably recover the best-fitting model for each trait and analysis (corHMM, SecSSE) by performing a non-parametric alternative of the repeated measure ANOVA (Friedman test) comparing the AICc of each model and then performing pairwise comparisons of each model with a paired signed-rank Wilcoxon test using the R package “rstatix” (Kassambara, 2023) where we reported the T statistic and p-value. These tests are implemented in the script "Posterior_test_comparative_analysis.r", which will require a directory with all data frame replicates (either corHMM or SecSSE) as input.</p>
+<p align="justify"> For this last section, we will perform joint estimation of discrete and continuous trait evolution with hOUwie (Boyko & Beaulieu, 2023). Similar to corHMM and OUwie, both version of this script (consensus vs replicated) designate the consensus tree and the posterior distrubtion respectively. Both of these script are manage by the "run_hOUwie.sh" which essentially run all these analyses on traits (bioluminescence and habitat). </p>
 
 
 ### Reference
 
-Beaulieu, J. M. Donoghue, M. J. (2013). Fruit evolution and diversification in campanulid angiosperms: Campanulid fruit evolution. Evolution. 67(11): 3132-3144.
+Boyko, J. D., O’Meara, B. C., & Beaulieu, J. M. (2023). A novel method for jointly modeling the evolution of discrete and continuous traits. Evolution, 77(3), 836-851.
 
-Beaulieu, J. M., & O’Meara, B. C. (2016). Detecting Hidden Diversification Shifts in Models of Trait-Dependent Speciation and Extinction. Systematic Biology, 65(4), 583-601. 
+R Core Team (2022). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.
 
-Boyko, J. D., & Beaulieu, J. M. (2021). Generalized hidden Markov models for phylogenetic comparative datasets. Methods in Ecology and Evolution, 12(3), 468-478. 
+Silvestro, D., Salamin, N., & Schnitzler, J. (2014). PyRate: a new program to estimate speciation and extinction rates from incomplete fossil data. Methods in Ecology and Evolution, 5(10), 1126-1131.
 
-Etienne, R. S., Haegeman, B., Stadler, T., Aze, T., Pearson, P. N., Purvis, A., & Phillimore, A. B. (2012). Diversity-dependence brings molecular phylogenies closer to agreement with the fossil record. Proceedings of the Royal Society B: Biological Sciences, 279(1732), 1300-1309. 
-
-Herrera-Alsina, L. van Els, P. Etienne, R. S. (2019). Detecting the dependence of diversification on multiple traits from phylogenetic trees and trait data. Systematic Biology. 68(2): 317-328.
-
-Fraley, C. Raftery, A. E. Murphy, T. B. & Scrucca, L. (2012). mclust Version 4 for R: normal mixture modelling for model-based clustering, classification, and density estimation. Technical Report No. 597. Seattle, WA: Department of Statistics, University of Washington.
-
-Maddison, W. P. (2006). Confounding asymmetries in evolutionary diversification and character change. Evolution, 60(8), 1743-1746.
-
-R Core Team (2022). R: A language and environment for statistical
-computing. R Foundation for Statistical Computing, Vienna, Austria.
-URL https://www.R-project.org/.
+Silvestro, D., Salamin, N., Antonelli, A., & Meyer, X. (2019). Improved estimation of macroevolutionary rates from fossil data using a Bayesian framework. Paleobiology, 45(4), 546-570.
