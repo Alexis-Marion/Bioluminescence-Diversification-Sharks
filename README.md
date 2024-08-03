@@ -62,6 +62,25 @@ PyRate is a bayesian programm, thus we will consider that a PyRate run is finish
 
 In this last section, we provided plotting scripts to display graphically each PyRate output. These scripts will take as input the output direcotry of a regular (BDCS or RJMCMC) PyRate run, and will represent, the RTT (origination and extiction), the diversification RTT, the LTT and the QTT.
 
+In this section, we propose a quantitative comparaison between each PyRate model couple (e.g. a model with full preservation time bins, and another with less preservation shift frame). Specifically, since some alternative models do not possess the same structure, statistical comparaison between each model could be inapropriate. Instead, we could still compare the estimated values (in our case Ts, Te, origination and extinction rate) and evaluate wether they significantly differ from one another when comparing two alternative models. Here we choose to compare each PyRate replicate separatelty (thus each comparaison is performed 20 times), and consider performing pairwise comparaison of Ts, Te, origination and extinction rate values between each two alternative model.
+
+
+Extracting Ts Te values
+
+These scripts are relatively straightforward and directly extract the Ts Te value for each replicate from a designated PyRate output directory, and merguez them into a single file.
+
+Estimating lineage through time per habitat
+
+Using the Ts/Te output from section 2.2 and by using palaeoenvironemental data, we estimated the lineage through time for each habitat.
+
+Estimating tempo of origination
+
+Using the Ts/Te output from section 2.2 and the posterior tree distribution, this script estimate the tempo of origination for each major squaliform clade, using both palaeontological, and neontological evidence. Likewise, this script also estimate the tempo of origination of each habitat preference across all Squaliformes familles, using the Ts/Te values as input. Lastly, by combining palaeontological and neontological evidences we estimated the tempo of origination of each putative bioluminescencent clade.
+
+Grafting phylogenies
+
+In this last section, we provide tools to graft fossil taxa on extant phylogenies.
+Placing a fossil into an already resolved extant time-calibrated tree represent a major challenge. To account for the potential bias possibly affecting the placement fossil, we relied on previously published phylogenetic hypotheses. Furthermore, to account for temporal uncertainty, we randomly sampled the orignation age for each extinct lineages from a uniform distrbution bounded with the estimated PyRate origination age as the upper limit, and the stem age of the sister clade of the fossil as the lower limit (i.e. the node preceding the aformentioned sister-clade). These scripts allow to perform this procedure on the consensus and posterior distribution, grafting up to twelve fossils.
 ## 2 Diversification analyses
 
 `package requirement (ape, mclust, secsse, DDD, tidyverse, qgraph, ggtree, phytools, treedataverse, RColorBrewer, ggplot2, ggpmisc, optional(stringr))`
