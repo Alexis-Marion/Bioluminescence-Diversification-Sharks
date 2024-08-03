@@ -4,13 +4,13 @@
 
 - [Summary](#Summary)
 - [Overview](#Overview)
-- [1 Bayesian estimation of deep-time diversfiication with PyRate](#1-Bayesian-estimation-of-deep-time-diversification-with-PyRate)
+- [1 Bayesian estimation of deep-time diversification with PyRate](#1-Bayesian-estimation-of-deep-time-diversification-with-PyRate)
 	- [1.1 Preservation model](#11-Preservation-model)
 	- [1.2 Running PyRate](#12-Running-Pyrate)
 	- [1.3 Assess convergence](#13-Assess-convergence)
   	- [1.4 Plotting PyRate results](#14-Plotting-PyRate-results)
 - [2 Analyses of the fossil record](#2-Analyses-of-the-fossil-record)
-  - [2.1 Selecting PyRate model](#21-Selecting-PyRate-model)
+        - [2.1 Selecting appropriate PyRate models](#21-Selecting-appropriate-PyRate-models)
 	- [2.2 Extracting time for speciation and extinction](#22-Extracting-time-for-speciation-and-extinction)
 	- [2.3 Estimating lineage through time per habitat](#23-Estimating-lineage-through-time-per-habitat)
   	- [2.4 Estimating tempo of origination](#24-Estimating-tempo-of-origination)
@@ -34,7 +34,7 @@
 
 **3**: Phylogenetic comparative analyses
 
-<p align="justify"> All data used to perform each analyses are deposited on this repository </p>
+<p align="justify"> All data used to perform each analysis are deposited on this repository </p>
 
 ## 1 Bayesian estimation of deep-time diversification with PyRate
 
@@ -42,45 +42,52 @@
 
 `used script (corHMM.r; corHMM_Diet.r; Plot_ASE.r)`
 
-<p align="justify">  In this first session, we will be using PyRate (Silvestro et al, 2014). PyRate is a programm implemented in Python whose aiml is to jointly estimate the preservation process, the tempo of origination and extinction of lineages based on their occurences in the fossil record. Here, we will assume that the PyRate repository with its functions is at the root of the current working directory.</p>
+<p align="justify">  In this first session, we will be using PyRate (Silvestro et al, 2014). PyRate is a program implemented in Python whose aim is to jointly estimate the preservation process, the tempo of origination and extinction of lineages based on their occurrences in the fossil record. Here, we will assume that the PyRate repository with its functions is at the root of the current working directory.</p>
 
 ### 1.1 Preservation model
 
-<p align="justify"> One the main strength of PyRate is its ability to account for the biais of the fossil record, by estimating a preservation process correcting the estimated age derived from raw occurences data. Thus, choosing the best-fit preservation model for any PyRate analysis is critical. Fortunately, Silvestro et al. (2018) implemented a likelihood-based approach for preservation model selection.Yet, while this procedure is certainly useful, it is incomplete. Indeed the first implementation allowed for model selection across HPP, NHPP, TPP and alternative version of the TPP, with missing bins. Howver, bin removal occured only once, and were not recursive. Consequently, model selection is incomplete. Here, we corrected and enhanced this procedure, by performing model selection on all PyRate replicate (here 100). Furthermore, we allowed for recursivec bin removal, meaning that the best fit TPP model could be a two-bin model whereas the generating TPP model could be a five-bin model. Model selection is performed with pairwise comparaison of the AICc metrics across all replicates. </p>
+<p align="justify"> One of the main strengths of PyRate is its ability to account for the bias of the fossil record, by estimating a preservation process and correcting the estimated age derived from raw occurrence data. Thus, choosing the best-fit preservation model for any PyRate analysis is critical. Fortunately, Silvestro et al. (2018) implemented a likelihood-based approach for preservation model selection. Yet, while this procedure is certainly useful, it is incomplete. Indeed the first implementation allowed for model selection across HPP, NHPP, TPP and alternative versions of the TPP, with missing bins. However, bin removal occurred only once, and was not recursive. Consequently, model selection is incomplete. Here, we corrected and enhanced this procedure, by performing model selection on all PyRate replicates (here 100). Furthermore, we allowed for recursive bin removal, meaning that the best fit TPP model could be a two-bin model whereas the generating TPP model could be a five-bin model. Model selection is performed with pairwise comparisons of the AICc metrics across all replicates. </p>
 
 </p> 
 
 ### 1.2 Running PyRate
 
-<p align="justify"> The script provided in this section is rather simple, and run a BDCS analyses on 20,000,000 generation on the genus dataset including singeltons, with diversification shifts every 5 Myrs and integrating preservation shifts from the 1.1 section. Here, to ber computaionally efecient, we choose to parallelise our run on 20 cpu.</p> 
+<p align="justify"> The script provided in this section is rather simple, and runs a BDCS (birth-death with constrained shifts) analysis on 20,000,000 generations on the genus dataset including singletons, with diversification shifts every 5 Myrs and integrating preservation shifts from the 1.1 section. Here, to be computationally efficient, we choose to parallelise our run on 20 CPU.</p> 
 
 ### 1.3 Assess convergence
 
-PyRate is a bayesian programm, thus we will consider that a PyRate run is finished when it achieved convergence. A popular metric to evaluate convergence is the ESS (effective sample size), and it is generally considered that when its number is above 200, convergence is achevied. Thus, we assessed convergence on all run using the "" scripts. Furthermore, these scritps give additional usefull metrics on the run, such as the origination age, extinction age (if including solely extinct taxa),and the proportion of Ts and Te, with ESS above 200. We also provided a graphical output that can be executed using ....
+<p align="justify"> PyRate is a Bayesian program, thus we will consider that a PyRate run is finished when it achieves convergence. A popular metric to evaluate convergence is the ESS (effective sample size), and it is generally considered that when its number is above 200, convergence is achieved. Thus, we assessed convergence on all runs using the "" scripts. Furthermore, these scripts give additional useful metrics on the run, such as the origination age, extinction age (if including solely extinct taxa), and the proportion of Ts and Te, with ESS above 200. We also provided a graphical output that can be executed using ....
 
 ### 1.4 Plotting PyRate results
 
-In this last section, we provided plotting scripts to display graphically each PyRate output. These scripts will take as input the output direcotry of a regular (BDCS or RJMCMC) PyRate run, and will represent, the RTT (origination and extiction), the diversification RTT, the LTT and the QTT.
+<p align="justify"> In this last section, we provided plotting scripts to display graphically each PyRate output. These scripts will take as input the output directory of a regular (BDCS or RJMCMC) PyRate run. They will represent, the RTT (origination and extinction), the diversification RTT, the LTT and the QTT.
 
-In this section, we propose a quantitative comparaison between each PyRate model couple (e.g. a model with full preservation time bins, and another with less preservation shift frame). Specifically, since some alternative models do not possess the same structure, statistical comparaison between each model could be inapropriate. Instead, we could still compare the estimated values (in our case Ts, Te, origination and extinction rate) and evaluate wether they significantly differ from one another when comparing two alternative models. Here we choose to compare each PyRate replicate separatelty (thus each comparaison is performed 20 times), and consider performing pairwise comparaison of Ts, Te, origination and extinction rate values between each two alternative model.
+## 2 Analyses of the fossil record
+
+<p align="justify">  In this section session, we will be using the output from PyRate and molecular phylogenies to estimate the tempo of origination of several clades, ecologies and traits.</p>
+
+### 2.1 Selecting appropriate PyRate models
+
+<p align="justify"> In this section, we propose a quantitative comparison between each PyRate model couple (e.g. a model with full preservation time bins, and another with less preservation shift frame). Specifically, since some alternative models do not possess the same structure, statistical comparison between each model could be inappropriate. Instead, we could still compare the estimated values (in our case Ts, Te, origination and extinction rate) and evaluate whether they significantly differ when comparing two alternative models. Here we choose to compare each PyRate replicate separately (thus each comparison is performed 20 times), and consider performing pairwise comparisons of Ts, Te, origination and extinction rate values between each two alternative models.
 
 
-Extracting Ts Te values
+### 2.2 Extracting time for speciation and extinction
 
-These scripts are relatively straightforward and directly extract the Ts Te value for each replicate from a designated PyRate output directory, and merguez them into a single file.
+<p align="justify"> These scripts are relatively straightforward and directly extract the Ts Te value for each replicate from a designated PyRate output directory, and merge them into a single file.
 
 Estimating lineage through time per habitat
 
-Using the Ts/Te output from section 2.2 and by using palaeoenvironemental data, we estimated the lineage through time for each habitat.
+<p align="justify"> Using the Ts/Te output from section 2.2 and by using palaeoenvironmental data, we estimated the lineage through time for each habitat.
 
 Estimating tempo of origination
 
-Using the Ts/Te output from section 2.2 and the posterior tree distribution, this script estimate the tempo of origination for each major squaliform clade, using both palaeontological, and neontological evidence. Likewise, this script also estimate the tempo of origination of each habitat preference across all Squaliformes familles, using the Ts/Te values as input. Lastly, by combining palaeontological and neontological evidences we estimated the tempo of origination of each putative bioluminescencent clade.
+<p align="justify"> Using the Ts/Te output from section 2.2 and the posterior tree distribution, this script estimates the tempo of origination for each major squaliform clade, using both palaeontological and neontological evidence. Likewise, this script also estimates the tempo of origination of each habitat preference across all Squaliformes families, using the Ts/Te values as input. Lastly, by combining palaeontological and neontological evidence we estimated the tempo of origination of each putative bioluminescent clade.
 
 Grafting phylogenies
 
-In this last section, we provide tools to graft fossil taxa on extant phylogenies.
-Placing a fossil into an already resolved extant time-calibrated tree represent a major challenge. To account for the potential bias possibly affecting the placement fossil, we relied on previously published phylogenetic hypotheses. Furthermore, to account for temporal uncertainty, we randomly sampled the orignation age for each extinct lineages from a uniform distrbution bounded with the estimated PyRate origination age as the upper limit, and the stem age of the sister clade of the fossil as the lower limit (i.e. the node preceding the aformentioned sister-clade). These scripts allow to perform this procedure on the consensus and posterior distribution, grafting up to twelve fossils.
+<p align="justify"> In this last section, we provide tools to graft fossil taxa on extant phylogenies.
+Placing a fossil into an already resolved extant time-calibrated tree represents a major challenge. To account for the potential bias possibly affecting the placement fossil, we relied on previously published phylogenetic hypotheses. Furthermore, to account for temporal uncertainty, we randomly sampled the orignation age for each extinct lineages from a uniform distrbution bounded with the estimated PyRate origination age as the upper limit, and the stem age of the sister clade of the fossil as the lower limit (i.e. the node preceding the aformentioned sister-clade). These scripts allow to perform this procedure on the consensus and posterior distribution, grafting up to twelve fossils.
+
 ## 2 Diversification analyses
 
 `package requirement (ape, mclust, secsse, DDD, tidyverse, qgraph, ggtree, phytools, treedataverse, RColorBrewer, ggplot2, ggpmisc, optional(stringr))`
