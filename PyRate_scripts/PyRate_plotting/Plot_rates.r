@@ -5,8 +5,8 @@ library("DDD")
 args <- commandArgs(trailingOnly=TRUE)
 
 ## Source accessory functions for plotting -------------------------------------
-source("1-extract_param_from_PyRate_outputs.R")
-source("2-plotting_facilities.R")
+source("1-extract_param_from_PyRate_outputs.r")
+source("2-plotting_facilities.r")
 
 ## Full plots ------------------------------------------------------------------
   ### All in one
