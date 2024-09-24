@@ -1,4 +1,4 @@
-python ../PyRate/PyRate.py -ginput $1 -b $2
+python ../../PyRate/PyRate.py -ginput $1 -b $2
 
 mkdir $3
 mkdir temp
