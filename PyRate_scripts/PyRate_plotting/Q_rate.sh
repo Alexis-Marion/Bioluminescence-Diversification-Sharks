@@ -6,11 +6,11 @@
 
 for file in $1/*mcmc.log
 	do
-	python3.8 ../../PyRate/PyRate.py -plotQ ${file} -qShift $4 -b $2
+	python ../../PyRate/PyRate.py -plotQ ${file} -qShift $4 -b $2
 	done
 mkdir -p $3
 mv $1/*_Qrates* $3
     #Parse and save individual q_rates to compile them in a table
-python3.8 parse_Q_rates.py -dir $3 -out $3/Parsed_Q_rates.tsv
+python parse_Q_rates.py -dir $3 -out $3/Parsed_Q_rates.tsv
 
 rm $3/*.r
