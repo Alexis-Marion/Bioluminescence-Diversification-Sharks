@@ -5,15 +5,13 @@ library("dispRity")
 
 source("function_grafting.r")
 
-tree<-read.tree("../../raw_data/Squaliformes_posterior_distribution.tree")
+trees<-read.tree("../../raw_data/Squaliformes_posterior_distribution.tree")
+
+phy<-read.tree("../../raw_data/Squaliformes_extant.tree")
 
 tab<-read.table("../../raw_data/Ts_Te_species.tsv", header = TRUE, sep ="\t")
 
 table_trait<-read.table("../../raw_data/Trait_data_Squaliformes_Fossil.tsv", header = TRUE, sep ="\t")
-
-phy<-extract.clade(tree, getMRCA(tree,c("Aculeola_nigra", "Squalus_nasutus")))
-
-write.tree(tree, "../../raw_data/Squaliformes_extant.tree")
 
 multi_tree<-function(tree, fossil_data, taxonomy, output){
 phylo_list<-list()
@@ -111,4 +109,4 @@ class(phylo_list)<-"multiPhylo"
     write.tree(phylo_list, file = output)
 }
 
-multi_tree_posterior(tree, tab, table_trait, "../../raw_data/Multi_Squaliformes_fossil_posterior_distribution.tree")
+multi_tree_posterior(trees, tab, table_trait, "../../raw_data/Multi_Squaliformes_fossil_posterior_distribution.tree")
