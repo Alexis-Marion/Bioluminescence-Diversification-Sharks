@@ -1,4 +1,4 @@
- # Ecological opportunity fostered deep-sea  diversification of squaliform sharks
+ # Bioluminescence and repeated deep-sea colonisation shaped the diversification and body size evolution of squaliform sharks
 
 ## Summary 
 
