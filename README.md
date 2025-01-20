@@ -21,7 +21,7 @@
   	- [3.3 Joint estimation of discrete and continuous trait evolution with hOUwie](#32-Joint-estimation-of-discrete-and-continuous-trait-evolution-with-hOUwie)
 - [Reference](#Reference)
 
-<p align="justify"> This repository's purpose is to give a means of replicability to the article "Ecological opportunity fostered deep-sea  diversification of squaliform sharks" but can be generalized to other similar data. All of the presented scripts are written in R language (R Core Team, 2022). Each script is available as both an annotated notebook (.ipynb) or a raw .r file (unannotated).
+<p align="justify"> This repository's purpose is to give a means of replicability to the article "Bioluminescence and repeated deep-sea colonisation shaped the diversification and body size evolution of squaliform sharks" but can be generalized to other similar data. All of the presented scripts are written in R language (R Core Team, 2022). Each script is available as both an annotated notebook (.ipynb) or a raw .r file (unannotated).
 	If you plan to use any of these scripts, please cite "XXX". </p>
 
 ## Overview
@@ -94,7 +94,7 @@
 
 `used script (Ts_Te_maker.r)`
 
-<p align="justify"> The first useful script in this section is "the random_sampler.r" script, which randomly samples 100 from a given distribution of tree. The last script "run_Model_selection.sh" is relatively straightforward and directly extract the Ts Te value for each replicate from a designated PyRate output directory, and merge them into a single file. </p>
+<p align="justify"> The first useful script in this section is "the random_sampler.r" script, which randomly samples 100 from a given distribution of trees. The last script "run_Model_selection.sh" is relatively straightforward and directly extracts the Ts Te value for each replicate from a designated PyRate output directory, and merges them into a single file. </p>
 
 ### 2.3 Estimating lineage through time per habitat
 
@@ -118,7 +118,7 @@
 
 `used script (Grafting_trees.r; function_grafting.r)`
 
-<p align="justify"> In this last section, we provide tools to graft fossil taxa on extant phylogenies. Placing a fossil into an already resolved extant time-calibrated tree represents a major challenge. To account for the potential bias possibly affecting the placement fossil, we relied on previously published phylogenetic hypotheses. Furthermore, to account for temporal uncertainty, we randomly sampled the origination age for each extinct lineage from a uniform distribution bounded with the estimated PyRate origination age as the upper limit, and the stem age of the sister clade of the fossil as the lower limit (i.e. the node preceding the aforementioned sister-clade). These scripts allow us to perform this procedure on the consensus and posterior distribution, grafting up to twelve fossils. </p>
+<p align="justify"> In this last section, we provide tools to graft fossil taxa on extant phylogenies. Placing a fossil into an already resolved extant time-calibrated tree represents a major challenge. To account for the potential bias possibly affecting the placement fossil, we relied on previously published phylogenetic hypotheses. Furthermore, to account for temporal uncertainty, we randomly sampled the origination age for each extinct lineage from a uniform distribution bounded with the estimated PyRate origination age as the upper limit, and the stem age of the sister clade of the fossil as the lower limit (i.e. the node preceding the sister-clade mentioned above). These scripts allow us to perform this procedure on the consensus and posterior distribution, grafting up to twelve fossils. </p>
 
 ## 3 Phylogenetic comparative analyses
 
@@ -132,7 +132,7 @@
 
 `used script (corHMM_ASE_consensus.r; corHMM_ASE_replicated.r; run_corHMM.sh)`
 
-<p align="justify"> The first step in this section is to perform analyses of discrete trait evolution using corHMM. Both version of this script (consensus vs replicated) designate the consensus tree and the posterior distrubtion respectively. Both of these script are manage by the "run_corHMM.sh" which essentially run all these analyses on all trees (extant and fossil+extant) and traits (bioluminescence and habitat).  </p>
+<p align="justify"> The first step in this section is to perform analyses of discrete trait evolution using corHMM. Both versions of this script (consensus vs replicated) designate the consensus tree and the posterior distribution respectively. Both of these scripts are managed by the "run_corHMM.sh" which essentially runs all these analyses on all trees (extant and fossil+extant) and traits (bioluminescence and habitat).  </p>
 
 ### 3.2 Analyses of continuous trait evolution with OUwie and phylogenetic ANOVA
 
@@ -140,23 +140,27 @@
 
 `used script (Phylogenetic_analysis_of_variance_(PANOVA).r; Phylogenetic_analysis_of_variance_(PANOVA-Replicated).r; PANOVA.sh; OUwie_consensus.r; OUwie_replicated.r; run_OUwie.sh)`
 
-<p align="justify"> The second step in this section is to perform analyses of continuous trait evolution using both PANOVA and OUwie. The first step consist on running a Phylogenetic analayses of variance, to compare wether the mean difference betwen any number of group significantly differ, even when considering phylogenetic relatedness. Both version of these scripts are managed by the script "PANOVA.sh" which will perform PANOVA on all dataset and on all trees (extant and fossil+extant). For OUwie, similarly to corHMM, both version of this script (consensus vs replicated) designate the consensus tree and the posterior distrubtion respectively. Both of these script are manage by the "run_OUwie.sh" which essentially run all these analyses on all trees (extant and fossil+extant) and traits (bioluminescence and habitat).  </p>
+<p align="justify"> The second step in this section is to perform analyses of continuous trait evolution using both PANOVA and OUwie. The first step consists of running Phylogenetic analyses of variance, to compare whether the mean difference between any number of groups significantly differs, even when considering phylogenetic relatedness. Here, to assess wether our results were robust regarding the analytical method employed, we implemented two phylogenetic ANOVA, the first with a null model process generated through simulation (sim-PANOVA; Revell, 2024), and a second with a null model process based on randomizing residuals in a permutation procedure (RRPP; Collyer & Adams, 2018). Both versions of these scripts are managed by the script "PANOVA.sh" which will perform PANOVA on all datasets and all trees (extant and fossil+extant). For OUwie, similarly to corHMM, both versions of this script (consensus vs replicated) designate the consensus tree and the posterior distribution respectively. Both of these scripts are managed by the "run_OUwie.sh" which essentially runs all these analyses on all trees (extant and fossil+extant) and traits (bioluminescence and habitat).  </p>
 
 
-### 3.3 Joint estimation of discrete and continuous trait evolution with hOUwie
+### 3.3 Joint estimations of discrete and continuous trait evolution with hOUwie
 
 `used directory (hOUwie)`
 
 `used script (hOUwie_consensus.r; hOUwie_consensus_bioluminescence_Replicated.r; run_hOUwie.sh)`
 
-<p align="justify"> For this last section, we will perform joint estimation of discrete and continuous trait evolution with hOUwie (Boyko & Beaulieu, 2023). Similar to corHMM and OUwie, both version of this script (consensus vs replicated) designate the consensus tree and the posterior distrubtion respectively. Both of these script are manage by the "run_hOUwie.sh" which essentially run all these analyses on traits (bioluminescence and habitat). </p>
+<p align="justify"> For this last section, we will perform joint estimation of discrete and continuous trait evolution with hOUwie (Boyko & Beaulieu, 2023). Like corHMM and OUwie, both versions of this script (consensus vs replicated) designate the consensus tree and the posterior distribution respectively. Both of these scripts are managed by the "run_hOUwie.sh" which runs all these analyses on traits (bioluminescence and habitat). </p>
 
 
 ### Reference
 
 Boyko, J. D., O’Meara, B. C., & Beaulieu, J. M. (2023). A novel method for jointly modeling the evolution of discrete and continuous traits. Evolution, 77(3), 836-851.
 
-R Core Team (2022). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.
+Collyer, M.L. & Adams, D.C. (2018) RRPP: an R package for fitting linear models to high-dimensional data using residual randomization. Methods in Ecology and Evolution, 9, 1772–1779.
+
+Revell, L. J. (2024). phytools 2.0: an updated R ecosystem for phylogenetic comparative methods (and other things). PeerJ, 12, e16505.
+
+R Core Team (2022). R: A language and environment for statistical computing. R Foundation for statistical computing, Vienna, Austria. URL https://www.R-project.org/.
 
 Silvestro, D., Salamin, N., & Schnitzler, J. (2014). PyRate: a new program to estimate speciation and extinction rates from incomplete fossil data. Methods in Ecology and Evolution, 5(10), 1126-1131.
 
