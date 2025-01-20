@@ -6,20 +6,20 @@
 
 # Bioluminescence
 
-Rscript Phylogenetic_analysis_of_variance_(PANOVA).r  7 bioluminescence
+#Rscript Phylogenetic_analysis_of_variance_PANOVA.r  7 bioluminescence
 
 # Habitat
 
-Rscript Phylogenetic_analysis_of_variance_(PANOVA).r  9 habitat
+#Rscript Phylogenetic_analysis_of_variance_PANOVA.r  9 habitat
 
 # Run the PANOVA on the posterior tree distribution
 
 # Bioluminescence
 
-echo "Rscript Phylogenetic_analysis_of_variance_(PANOVA-Replicated).r \$1 7 bioluminescence" > tmp_biol_script.sh
+echo "Rscript Phylogenetic_analysis_of_variance_PANOVA_Replicated.r \$1 7 bioluminescence" > tmp_biol_script.sh
 		parallel -j 40 bash tmp_biol_script.sh ::: {1..100}
 
 # Habitat
 
-echo "Rscript Phylogenetic_analysis_of_variance_(PANOVA-Replicated).r \$1 9 habitat" > tmp_biol_script.sh
-		parallel -j 40 bash tmp_biol_script.sh ::: {1..100}
+echo "Rscript Phylogenetic_analysis_of_variance_PANOVA_Replicated.r \$1 9 habitat" > tmp_hab_script.sh
+		parallel -j 40 bash tmp_hab_script.sh ::: {1..100}
