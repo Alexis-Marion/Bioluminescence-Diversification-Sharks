@@ -14,10 +14,6 @@ dir = args.dir
 burnins = args.burnins
 ana = args.ana
 
-
-#dir = '/media/lucas/SAMSUNG/Internship_ISEM/Neotropical_Mammals/PyRate_outputs/RJMCMC_ICC_subepoch_21-06/EOCENE_OLIGOCENE_order/Rodentia/q_stages/pyrate_mcmc_logs'
-#dir = "/media/lucas/SAMSUNG/Internship_ISEM/Neotropical_Mammals/MBD/EOCENE_OLIGOCENE/hand.scale_only/Full"
-
 ### Prior param specifications
 if ana == "RJMCMC":
     target = 'mcmc.log'
