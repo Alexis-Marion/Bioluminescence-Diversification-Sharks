@@ -6,18 +6,18 @@ args = commandArgs(trailingOnly=TRUE)
 
 tab<-read.csv(args[1], sep ="\t", header =TRUE, row.names =NULL)
 
-ToothGrowth<-as.data.frame(cbind(tab$ESS_posterior, rep("1", length(tab$ESS_posterior))))
+ESS_post<-as.data.frame(cbind(tab$ESS_posterior, rep("1", length(tab$ESS_posterior))))
 
 col<-rep("Above 200",length(tab$ESS_posterior))
 
-colnames(ToothGrowth)<-c("dose", "len")
+colnames(ESS_post)<-c("dose", "len")
 
-col[as.numeric(ToothGrowth[,1])<200]<-"Below 200"
-col[as.numeric(ToothGrowth[,1])<100]<-"Below 100"
+col[as.numeric(ESS_post[,1])<200]<-"Below 200"
+col[as.numeric(ESS_post[,1])<100]<-"Below 100"
 
-ToothGrowth<-cbind(ToothGrowth, col)
+ESS_post<-cbind(ESS_post, col)
 
-strp<-ggplot(ToothGrowth, aes(y = len, x = as.numeric(dose), color = col)) +
+strp<-ggplot(ESS_post, aes(y = len, x = as.numeric(dose), color = col)) +
     geom_jitter(width=1) +
     xlim(0,round(max(tab$ESS_posterior), digits = -1)) +
     xlab(label = "") + 
