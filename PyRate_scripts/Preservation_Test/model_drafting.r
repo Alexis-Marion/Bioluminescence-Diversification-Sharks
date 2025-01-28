@@ -71,7 +71,7 @@ for (i in 1:length(age)){
 }
 }
 
-if(tab_mean[tab_mean$Model == "TPP",4] == min(tab_mean$mean) | nrow(tab_mean) == 4)){
+if(tab_mean[tab_mean$Model == "TPP",4] == min(tab_mean$mean) | nrow(tab_mean) == 4){
     pwc2 <- pwc %>% add_xy_position(x = "time")
     ggboxplot(tab2, x = "Model", y = "AICc", add = "point") +
       stat_pvalue_manual(pwc2, hide.ns = TRUE) +
