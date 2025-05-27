@@ -92,9 +92,9 @@
 
 `used directory (Ts_Te_maker)`
 
-`used script (Ts_Te_maker.r)`
+`used script (Ts_Te_combined.r)`
 
-<p align="justify"> The first useful script in this section is "the random_sampler.r" script, which randomly samples 100 from a given distribution of trees. The last script "run_Model_selection.sh" is relatively straightforward and directly extracts the Ts Te value for each replicate from a designated PyRate output directory, and merges them into a single file. </p>
+<p align="justify"> The script used in this section permits to create additional Ts_Te files that can be later used in PyRate. The combination method used here is that of Brée et al., (2022) and consists of extracting the estimated Time for Speciation (Ts) and Time for Extinction (Te) estimated with PyRate, and merging them with the estimated extant taxa age from a dated phylogeny. Here, we did so by extracting the branch length  from 100 posterior trees (Marion et al., 2024) of all extant species that are not sampled in the fossil record and merge them with the Ts Te estimated with PyRate.  </p>
 
 ### 2.3 Estimating lineage through time per habitat
 
@@ -154,9 +154,13 @@
 
 ### Reference
 
+Brée, B., Condamine, F. L., & Guinot, G. (2022). Combining palaeontological and neontological data shows a delayed diversification burst of carcharhiniform sharks likely mediated by environmental change. Scientific Reports, 12(1), 21906.
+
 Boyko, J. D., O’Meara, B. C., & Beaulieu, J. M. (2023). A novel method for jointly modeling the evolution of discrete and continuous traits. Evolution, 77(3), 836-851.
 
 Collyer, M.L. & Adams, D.C. (2018) RRPP: an R package for fitting linear models to high-dimensional data using residual randomization. Methods in Ecology and Evolution, 9, 1772–1779.
+
+Marion, A. F., Condamine, F. L., & Guinot, G. (2024). Sequential trait evolution did not drive deep-time diversification in sharks. Evolution, 78(8), 1405-1425.
 
 Revell, L. J. (2024). phytools 2.0: an updated R ecosystem for phylogenetic comparative methods (and other things). PeerJ, 12, e16505.
 
