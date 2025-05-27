@@ -34,7 +34,7 @@
 
 **3**: Phylogenetic comparative analyses
 
-<p align="justify"> All data used to perform each analysis are deposited on this repository </p>
+<p align="justify"> All data used to perform each analysis are deposited in this repository </p>
 
 ## 1 Bayesian estimation of deep-time diversification with PyRate
 
@@ -48,7 +48,7 @@
 
 `used script (model_preservation_test.sh, model_drafting.r; run_preservation.sh)`
 
-<p align="justify"> One of the main strengths of PyRate is its ability to account for the bias of the fossil record, by estimating a preservation process and correcting the estimated age derived from raw occurrence data. Thus, choosing the best-fit preservation model for any PyRate analysis is critical. Fortunately, Silvestro et al. (2019) implemented a likelihood-based approach for preservation model selection. Yet, while this procedure is certainly useful, it is incomplete. Indeed the first implementation allowed for model selection across HPP, NHPP, TPP and alternative versions of the TPP, with missing bins. However, bin removal occurred only once, and was not recursive. Consequently, model selection is incomplete. Here, we corrected and enhanced this procedure, by performing model selection on all PyRate replicates (here 100). Furthermore, we allowed for recursive bin removal, meaning that the best fit TPP model could be a two-bin model whereas the generating TPP model could be a five-bin model. Model selection is performed with pairwise comparisons of the AICc metrics across all replicates. </p>
+<p align="justify"> One of the main strengths of PyRate is its ability to account for the bias of the fossil record by estimating a preservation process and correcting the estimated age derived from raw occurrence data. Thus, choosing the best-fit preservation model for any PyRate analysis is critical. Fortunately, Silvestro et al. (2019) implemented a likelihood-based approach for preservation model selection. Yet, while this procedure is certainly useful, it is incomplete. Indeed, the first implementation allowed for model selection across HPP, NHPP, TPP and alternative versions of the TPP, with missing bins. However, bin removal occurred only once and was not recursive. Consequently, model selection is incomplete. Here, we corrected and enhanced this procedure by performing model selection on all PyRate replicates (here, 100). Furthermore, we allowed for recursive bin removal, meaning that the best fit TPP model could be a two-bin model, whereas the generating TPP model could be a five-bin model. Model selection is performed with pairwise comparisons of the AICc metrics across all replicates. </p>
 
 ### 1.2 Running PyRate
 
@@ -56,7 +56,7 @@
 
 `used script (PyRate_run.sh)`
 
-<p align="justify"> The script provided in this section is rather simple, and runs a BDCS (birth-death with constrained shifts) analysis on 20,000,000 generations on the genus dataset including singletons, with diversification shifts every 5 Myrs and integrating preservation shifts from the 1.1 section. Here, to be computationally efficient, we choose to parallelise our run on 20 CPU.</p> 
+<p align="justify"> The script provided in this section is rather simple, and runs a BDCS (birth-death with constrained shifts) analysis on 20,000,000 generations on the genus dataset, including singletons, with diversification shifts every 5 Myrs and integrating preservation shifts from the 1.1 section. Here, to be computationally efficient, we choose to parallelise our run on 20 CPUs </p> 
 
 ### 1.3 Assess convergence
 
@@ -64,7 +64,7 @@
 
 `used script (assess_run_convergence.py; plot_ess.r; run_convergence.sh)`
 
-<p align="justify"> PyRate is a Bayesian program, thus we will consider that a PyRate run is finished when it achieves convergence. A popular metric to evaluate convergence is the ESS (effective sample size), and it is generally considered that when its number is above 200, convergence is achieved. Thus, we assessed convergence on all runs using the "assess_run_convergence.py" script. Furthermore, this script gives additional useful metrics on the run, such as the origination age, extinction age (if including solely extinct taxa), and the proportion of Ts and Te, with ESS above 200. We also provided a graphical output that can be executed using "plot_ess.r". These two scripts can be run sequentially using the "run_convergence.sh" script.
+<p align="justify"> PyRate is a Bayesian program, thus, we will consider that a PyRate run is finished when it achieves convergence. A popular metric to evaluate convergence is the ESS (effective sample size), and it is generally considered that when its number is above 200, convergence is achieved. Thus, we assessed convergence on all runs using the "assess_run_convergence.py" script. Furthermore, this script gives additional useful metrics on the run, such as the origination age, extinction age (if including solely extinct taxa), and the proportion of Ts and Te, with ESS above 200. We also provided a graphical output that can be executed using "plot_ess.r". These two scripts can be run sequentially using the "run_convergence.sh" script.
 
 ### 1.4 Plotting PyRate results
 
@@ -72,7 +72,7 @@
 
 `used script (1-extract_param_from_PyRate_outputs.r; 2-plotting_facilities.r; Plot_rates.r; Q_rate.sh; ltt_creator.sh; master_script_plotting.sh; parse_Q_rates.py; run_plotting.sh)`
 
-<p align="justify"> In this last section, we provided plotting scripts to display graphically each PyRate output. These scripts will take as input the output directory of a regular (BDCS or RJMCMC) PyRate run. They will represent, the RTT (origination and extinction), the diversification RTT, the LTT and the QTT. All the aforementioned scripts are managed using the "master_script_plotting.sh" script, which is the only one that is meant to be run by the user. </p>
+<p align="justify"> In this last section, we provided plotting scripts to display graphically each PyRate output. These scripts will take as input the output directory of a regular (BDCS or RJMCMC) PyRate run. They will represent the RTT (origination and extinction), the diversification RTT, the LTT and the QTT. All the aforementioned scripts are managed using the "master_script_plotting.sh" script, which is the only one that is meant to be run by the user. </p>
 
 ## 2 Analyses of the fossil record
 
@@ -86,7 +86,7 @@
 
 `used script (Model_selection.r; run_Model_selection.sh)`
 
-<p align="justify"> In this section, we propose a quantitative comparison between each PyRate model couple (e.g. a model with full preservation time bins, and another with less preservation shift frame). Specifically, since some alternative models do not possess the same structure, statistical comparison between each model could be inappropriate. Instead, we could still compare the estimated values (in our case Ts, Te, origination and extinction rate) and evaluate whether they significantly differ when comparing two alternative models. Here we choose to compare each PyRate replicate separately (thus each comparison is performed 20 times), and consider performing pairwise comparisons of Ts, Te, origination and extinction rate values between each two alternative models. </p>
+<p align="justify"> In this section, we propose a quantitative comparison between each PyRate model couple (e.g. a model with full preservation time bins, and another with fewer preservation shift frames). Specifically, since some alternative models do not possess the same structure, statistical comparison between each model could be inappropriate. Instead, we could still compare the estimated values (in our case Ts, Te, origination and extinction rate) and evaluate whether they significantly differ when comparing two alternative models. Here we choose to compare each PyRate replicate separately (thus each comparison is performed 20 times), and consider performing pairwise comparisons of Ts, Te, origination and extinction rate values between each two alternative models. </p>
 
 ### 2.2 Extracting time for speciation and extinction
 
@@ -94,7 +94,7 @@
 
 `used script (Ts_Te_combined.r)`
 
-<p align="justify"> The script used in this section permits to create additional Ts_Te files that can be later used in PyRate. The combination method used here is that of Brée et al., (2022) and consists of extracting the estimated Time for Speciation (Ts) and Time for Extinction (Te) estimated with PyRate, and merging them with the estimated extant taxa age from a dated phylogeny. Here, we did so by extracting the branch length  from 100 posterior trees (Marion et al., 2024) of all extant species that are not sampled in the fossil record and merge them with the Ts Te estimated with PyRate.  </p>
+<p align="justify"> The script used in this section permits to create additional Ts_Te files that can be later used in PyRate. The combination method used here is that of Brée et al. (2022) and consists of extracting the estimated Time for Speciation (Ts) and Time for Extinction (Te) estimated with PyRate, and merging them with the estimated extant taxa age from a dated phylogeny. Here, we did so by extracting the branch length  from 100 posterior trees (Marion et al., 2024) of all extant species that are not sampled in the fossil record and merging them with the Ts Te estimated with PyRate.  </p>
 
 ### 2.3 Estimating lineage through time per habitat
 
@@ -110,7 +110,7 @@
 
 `used script (Plot_estimated_ages.r)`
 
-<p align="justify"> Using the Ts/Te output from section 2.2 and the posterior tree distribution, this script estimates the tempo of origination for each major squaliform clade, using both palaeontological and neontological evidence. Likewise, this script also estimates the tempo of origination of each habitat preference across all Squaliformes families, using the Ts/Te values as input. Lastly, by combining palaeontological and neontological evidence we estimated the tempo of origination of each putative bioluminescent clade. </p>
+<p align="justify"> Using the Ts/Te output from section 2.2 and the posterior tree distribution, this script estimates the tempo of origination for each major squaliform clade, using both palaeontological and neontological evidence. Likewise, this script also estimates the tempo of origination of each habitat preference across all Squaliformes families, using the Ts/Te values as input. Lastly, by combining palaeontological and neontological evidence, we estimated the tempo of origination of each putative bioluminescent clade. </p>
 
 ### 2.5 Grafting phylogenies
 
@@ -118,7 +118,7 @@
 
 `used script (Grafting_trees.r; function_grafting.r)`
 
-<p align="justify"> In this last section, we provide tools to graft fossil taxa on extant phylogenies. Placing a fossil into an already resolved extant time-calibrated tree represents a major challenge. To account for the potential bias possibly affecting the placement fossil, we relied on previously published phylogenetic hypotheses. Furthermore, to account for temporal uncertainty, we randomly sampled the origination age for each extinct lineage from a uniform distribution bounded with the estimated PyRate origination age as the upper limit, and the stem age of the sister clade of the fossil as the lower limit (i.e. the node preceding the sister-clade mentioned above). These scripts allow us to perform this procedure on the consensus and posterior distribution, grafting up to twelve fossils. </p>
+<p align="justify"> In this last section, we provide tools to graft fossil taxa onto extant phylogenies. Placing a fossil into an already resolved extant time-calibrated tree represents a major challenge. To account for the potential bias possibly affecting the placement of fossils, we relied on previously published phylogenetic hypotheses. Furthermore, to account for temporal uncertainty, we randomly sampled the origination age for each extinct lineage from a uniform distribution bounded with the estimated PyRate origination age as the upper limit, and the stem age of the sister clade of the fossil as the lower limit (i.e. the node preceding the sister-clade mentioned above). These scripts allow us to perform this procedure on the consensus and posterior distribution, grafting up to twelve fossils. </p>
 
 ## 3 Phylogenetic comparative analyses
 
@@ -132,7 +132,7 @@
 
 `used script (corHMM_ASE_consensus.r; corHMM_ASE_replicated.r; run_corHMM.sh)`
 
-<p align="justify"> The first step in this section is to perform analyses of discrete trait evolution using corHMM. Both versions of this script (consensus vs replicated) designate the consensus tree and the posterior distribution respectively. Both of these scripts are managed by the "run_corHMM.sh" which essentially runs all these analyses on all trees (extant and fossil+extant) and traits (bioluminescence and habitat).  </p>
+<p align="justify"> The first step in this section is to perform analyses of discrete trait evolution using corHMM. Both versions of this script (consensus vs replicated) designate the consensus tree and the posterior distribution, respectively. Both of these scripts are managed by the "run_corHMM.sh" which essentially runs all these analyses on all trees (extant and fossil+extant) and traits (bioluminescence and habitat).  </p>
 
 ### 3.2 Analyses of continuous trait evolution with OUwie and phylogenetic ANOVA
 
@@ -140,7 +140,7 @@
 
 `used script (Phylogenetic_analysis_of_variance_(PANOVA).r; Phylogenetic_analysis_of_variance_(PANOVA-Replicated).r; PANOVA.sh; OUwie_consensus.r; OUwie_replicated.r; run_OUwie.sh)`
 
-<p align="justify"> The second step in this section is to perform analyses of continuous trait evolution using both PANOVA and OUwie. The first step consists of running Phylogenetic analyses of variance, to compare whether the mean difference between any number of groups significantly differs, even when considering phylogenetic relatedness. Here, to assess wether our results were robust regarding the analytical method employed, we implemented two phylogenetic ANOVA, the first with a null model process generated through simulation (sim-PANOVA; Revell, 2024), and a second with a null model process based on randomizing residuals in a permutation procedure (RRPP; Collyer & Adams, 2018). Both versions of these scripts are managed by the script "PANOVA.sh" which will perform PANOVA on all datasets and all trees (extant and fossil+extant). For OUwie, similarly to corHMM, both versions of this script (consensus vs replicated) designate the consensus tree and the posterior distribution respectively. Both of these scripts are managed by the "run_OUwie.sh" which essentially runs all these analyses on all trees (extant and fossil+extant) and traits (bioluminescence and habitat).  </p>
+<p align="justify"> The second step in this section is to perform analyses of continuous trait evolution using both PANOVA and OUwie. The first step consists of running Phylogenetic analyses of variance to compare whether the mean difference between any number of groups significantly differs, even when considering phylogenetic relatedness. Here, to assess wether our results were robust regarding the analytical method employed, we implemented two phylogenetic ANOVA, the first with a null model process generated through simulation (sim-PANOVA; Revell, 2024), and a second with a null model process based on randomizing residuals in a permutation procedure (RRPP; Collyer & Adams, 2018). Both versions of these scripts are managed by the script "PANOVA.sh" which will perform PANOVA on all datasets and all trees (extant and fossil+extant). For OUwie, similarly to corHMM, both versions of this script (consensus vs replicated) designate the consensus tree and the posterior distribution, respectively. Both of these scripts are managed by the "run_OUwie.sh" which essentially runs all these analyses on all trees (extant and fossil+extant) and traits (bioluminescence and habitat).  </p>
 
 
 ### 3.3 Joint estimations of discrete and continuous trait evolution with hOUwie
@@ -149,7 +149,7 @@
 
 `used script (hOUwie_consensus.r; hOUwie_consensus_bioluminescence_Replicated.r; run_hOUwie.sh)`
 
-<p align="justify"> For this last section, we will perform joint estimation of discrete and continuous trait evolution with hOUwie (Boyko & Beaulieu, 2023). Like corHMM and OUwie, both versions of this script (consensus vs replicated) designate the consensus tree and the posterior distribution respectively. Both of these scripts are managed by the "run_hOUwie.sh" which runs all these analyses on traits (bioluminescence and habitat). </p>
+<p align="justify"> For this last section, we will perform joint estimation of discrete and continuous trait evolution with hOUwie (Boyko & Beaulieu, 2023). Like corHMM and OUwie, both versions of this script (consensus vs replicated) designate the consensus tree and the posterior distribution, respectively. Both of these scripts are managed by the "run_hOUwie.sh", which runs all these analyses on traits (bioluminescence and habitat). </p>
 
 
 ### Reference
