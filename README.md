@@ -22,7 +22,7 @@
 - [Reference](#Reference)
 
 <p align="justify"> This repository's purpose is to give a means of replicability to the article "Bioluminescence and repeated deep-sea colonisation shaped the diversification and body size evolution of squaliform sharks" but can be generalized to other similar data. All of the presented scripts are written in R language (R Core Team, 2022). Each script is available as both an annotated notebook (.ipynb) or a raw .r file (unannotated).
-	If you plan to use any of these scripts, please cite "XXX". </p>
+	If you plan to use any of these scripts, please cite "Marion, A. F., Condamine, F. L., & Guinot, G. (2025). Bioluminescence and repeated deep-sea colonization shaped the diversification and body size evolution of squaliform sharks. Proceedings B, 292(2042), 20242932.". </p>
 
 ## Overview
 
